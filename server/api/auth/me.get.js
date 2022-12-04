@@ -1,6 +1,7 @@
 
 import userModel from '~~/server/model/user.model'
 import jwt from 'jsonwebtoken'
+import me from '~~/server/utils/me'
 
 export default defineEventHandler( async ( event ) => {
 	const config = useRuntimeConfig()
@@ -14,10 +15,7 @@ export default defineEventHandler( async ( event ) => {
 				statusMessage: 'unauthorized'
 			}
 		}
-
 		const verify = await jwt.verify( authorization,config.JWT_SECRET )
-
-		console.log( verify )
 
 		return verify
 	} catch ( error ) {

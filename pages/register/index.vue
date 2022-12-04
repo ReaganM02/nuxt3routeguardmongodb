@@ -1,5 +1,5 @@
 <script setup>
-import { useToast,POSITION } from 'vue-toastification'
+import { useToast, POSITION } from 'vue-toastification'
 // Import the CSS or use your own!
 import "vue-toastification/dist/index.css";
 
@@ -23,7 +23,7 @@ const loading = ref( null )
 
 const createAccount = async () => {
 	loading.value = true
-	await $fetch( '/api/auth/register',{
+	await $fetch( '/api/auth/register', {
 		method: 'POST',
 		body: {
 			name: email.value,
@@ -31,16 +31,13 @@ const createAccount = async () => {
 			password: password.value,
 			confirmPassword: confirmPassword.value
 		},
-		onResponse( { request,response } ) {
+		onResponse( { request, response } ) {
 			this.nameErr = 'Hello World'
 			console.log( response )
 
 			if ( response._data.status === 200 ) {
 
-				toast.success( response._data.message,{
-					timeout: 3000,
-					position: POSITION.BOTTOM_CENTER
-				} )
+				console.log( response._data )
 			}
 			else {
 
@@ -61,10 +58,6 @@ onMounted( () => {
 	registerRef.value.reset()
 } )
 
-
-//definePageMeta( {
-//	middleware: 'unauthorized'
-//} )
 
 </script>
 <template>
